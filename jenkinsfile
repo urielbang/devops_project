@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'API_URL', defaultValue: 'https://api.example.com/data', description: 'URL of the API to fetch data from')
+    }
+    environment {
+        PYTHON = '/usr/bin/python3' // Adjust the Python path according to your Jenkins setup
+    }
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh "${env.PYTHON} -m pip install --upgrade pip"
+                sh "${env.PYTHON} -m pip install -r requirements.txt"
+            }
+        }
+        stage('Run Python Script') {
+            steps {
+                sh "${env.PYTHON} data_processing.py ${params.API_URL}"
+            }
+        }
+        stage('Archive HTML') {
+            steps {
+                archiveArtifacts artifacts: 'output.html', fingerprint: true
+            }
+        }
+    }
+}
