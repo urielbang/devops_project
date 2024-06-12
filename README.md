@@ -20,4 +20,4 @@ This project fetches data from an external API, processes the data, and outputs 
 1. **Clone the Repository**:
    Clone the repository to your local machine using the following command:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/urielbang/devops_project
